@@ -1,0 +1,153 @@
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@-webkit-keyframes ellipsis {
+    0% {
+      content: ".";
+    }
+    33% {
+      content: "..";
+    }
+    66% {
+      content: "...";
+    }
+  }
+
+@-moz-keyframes ellipsis {
+    0% {
+      content: ".";
+    }
+    33% {
+      content: "..";
+    }
+    66% {
+      content: "...";
+    }
+  }
+
+@keyframes ellipsis {
+    0% {
+      content: ".";
+    }
+    33% {
+      content: "..";
+    }
+    66% {
+      content: "...";
+    }
+  }
+
+  .is-invalid{
+    background-image: none!important ;
+    border-color: #F3969A!important;
+  }
+  .is-invalid:focus{
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(243,150,154,0.25)!important ;
+    box-shadow: 0 0 0 0.2rem rgba(243,150,154,0.25)!important ;
+  }
+  .btn:focus{
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+  }
+.select-none {
+  -webkit-user-select: none;
+  /* Safari 3.1+ */
+  -moz-user-select: none;
+  /* Firefox 2+ */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Standard syntax */
+}
+
+.height-90{
+  min-height:90vh
+}
+
+.bg-animation{
+  background: linear-gradient( 109.6deg,  rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1% );
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;
+}
+
+
+.ellipsis:after {
+    display: inline-block;
+    animation: ellipsis 2s infinite;
+    -webkit-animation: ellipsis 2s ease infinite;
+    -moz-animation: ellipsis 2s ease infinite;
+    content: ".";
+    width: 1em;
+    text-align: left;
+  }
+
+@media (min-width: 576px){
+.card-columns {
+    -webkit-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 2rem;
+    column-gap: 2rem;
+    orphans: 1;
+    widows: 1;
+}
+}
+
+.card-body > .form-group:last-child{
+  margin-bottom: 0;
+}
+
+.card > .card-body:last-child:not(.card-option){
+  padding-bottom: 1.5rem !important;
+}
+
+
+.mg {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin: 0;/* gutter size offset */
+  margin-top:122px;
+  width: auto;
+}
+.mg_column {
+  padding: 1rem; /* gutter size */
+}
+ 
+.mg_column > div { /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 1rem;
+}
