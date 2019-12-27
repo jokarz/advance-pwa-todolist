@@ -1,6 +1,6 @@
-//import axios from '../../utility/axiosInstance';
+// import axios from '../../utility/axiosInstance';
 import { getData, setData } from '../../utility/localStorageHelper'
-//-----------------------------View Archive---------------------$
+// -----------------------------View Archive---------------------$
 export const setArchive = data => {
   return {
     type: 'setArchive',
@@ -8,8 +8,7 @@ export const setArchive = data => {
   }
 }
 
-
-//-----------------------------SUCCESS---------------------
+// -----------------------------SUCCESS---------------------
 export const resetSuccess = () => {
   return {
     type: 'resetSuccess'
@@ -29,7 +28,7 @@ export const successAt = data => {
   }
 }
 
-//-----------------------LOADING---------------------------
+// -----------------------LOADING---------------------------
 export const loadStart = () => {
   return {
     type: 'loadStart'
@@ -42,7 +41,7 @@ export const loadStop = () => {
   }
 }
 
-//---------------------------------------ALERT----------------------
+// ---------------------------------------ALERT----------------------
 export const alertStart = () => {
   return {
     type: 'alertStart'
@@ -62,22 +61,20 @@ export const alertMsg = data => {
   }
 }
 
-export const alertAt = data => { //topic, todo+id, edit+id
+export const alertAt = data => { // topic, todo+id, edit+id
   return {
     type: 'alertAt',
     data
   }
 }
 
-
-//-----------------------LOAD TOPIC AND TODOS--------------------------------
+// -----------------------LOAD TOPIC AND TODOS--------------------------------
 export const loadAll = data => {
   return {
     type: 'loadAll',
     data
   }
 }
-
 
 export const autoGetAll = () => {
   return async dispatch => {
@@ -97,8 +94,8 @@ export const addTopic = title => {
   return async dispatch => {
     title = title.trim()
     const data = getData()
-    let index = data.findIndex(item => item.title === title)
-    dispatch(loadStart());
+    const index = data.findIndex(item => item.title === title)
+    dispatch(loadStart())
     if (title === '') {
       dispatch(loadStop())
       dispatch(alertAt('topic'))
@@ -113,7 +110,7 @@ export const addTopic = title => {
       setTimeout(() => { dispatch(alertStop()) }, 3000)
     } else {
       const id = Math.random().toString(36).substring(2)
-      setData([{ id, title, archive: false, todos: { "completed": [], "incomplete": [] } }, ...data])
+      setData([{ id, title, archive: false, todos: { completed: [], incomplete: [] } }, ...data])
       dispatch(loadStop())
       dispatch(success())
       dispatch(successAt('topic' + title))
@@ -125,12 +122,12 @@ export const addTopic = title => {
 export const archiveTopic = (topicId, archive) => {
   return async dispatch => {
     const data = getData()
-    dispatch(loadStart());
-    dispatch(resetSuccess());
-    let index = data.findIndex(item => item.id === topicId)
+    dispatch(loadStart())
+    dispatch(resetSuccess())
+    const index = data.findIndex(item => item.id === topicId)
     if (index > -1) {
       data[index].archive = archive
-      let tempo = data[index]
+      const tempo = data[index]
       data.splice(index, 1)
       data.unshift(tempo)
       if (!data.some(item => item.archive)) {
@@ -142,7 +139,7 @@ export const archiveTopic = (topicId, archive) => {
     dispatch(successAt('topicarchive' + topicId))
     dispatch(success())
     dispatch(getAll())
-    dispatch(resetSuccess());
+    dispatch(resetSuccess())
   }
 }
 
@@ -150,8 +147,8 @@ export const renameTopic = (topicId, title) => {
   return async dispatch => {
     const data = getData()
     let index = data.findIndex(item => item.title === title)
-    dispatch(loadStart());
-    dispatch(resetSuccess());
+    dispatch(loadStart())
+    dispatch(resetSuccess())
     if (index > -1) {
       dispatch(alertAt('topictitle' + topicId))
       dispatch(alertMsg(`Topic already exist ${data[index].archive ? 'in archived' : ''}`))
@@ -170,20 +167,19 @@ export const renameTopic = (topicId, title) => {
       dispatch(successAt('topictitle' + topicId))
     }
     setTimeout(() => {
-      dispatch(resetSuccess());
+      dispatch(resetSuccess())
     }, 50)
-
   }
 }
 
 export const duplicateTopic = topicId => {
   return async dispatch => {
     const data = getData()
-    dispatch(loadStart());
+    dispatch(loadStart())
     dispatch(resetSuccess())
     let dup = null
     for (let i = 0; i < data.length; i++) {
-      let item = data[i]
+      const item = data[i]
       if (item.id === topicId) {
         dup = JSON.parse(JSON.stringify(item))
         break
@@ -192,7 +188,7 @@ export const duplicateTopic = topicId => {
     let index = 1
     while (true) {
       let exist = false
-      let title = `(${index}) ${dup.title}`
+      const title = `(${index}) ${dup.title}`
 
       for (let i = 0; i < data.length; i++) {
         if (data[i].title === title) {
@@ -204,7 +200,7 @@ export const duplicateTopic = topicId => {
         dup.title = title
         dup.id = Math.random().toString(36).substring(2)
         data.unshift(dup)
-        break;
+        break
       }
       index++
     }
@@ -214,7 +210,7 @@ export const duplicateTopic = topicId => {
     dispatch(successAt('topicduplicate' + topicId))
     dispatch(getAll())
     setTimeout(() => {
-      dispatch(resetSuccess());
+      dispatch(resetSuccess())
     }, 50)
   }
 }
@@ -222,8 +218,8 @@ export const duplicateTopic = topicId => {
 export const deleteTopic = topicId => {
   return async dispatch => {
     const data = getData()
-    dispatch(loadStart());
-    let index = data.findIndex(item => item.id === topicId)
+    dispatch(loadStart())
+    const index = data.findIndex(item => item.id === topicId)
     if (index > -1) {
       data.splice(index, 1)
       if (!data.some(item => item.archive)) {
@@ -237,13 +233,13 @@ export const deleteTopic = topicId => {
   }
 }
 
-//this part onwards is done differently from the server sided ver
+// this part onwards is done differently from the server sided ver
 export const addTodo = (topicId, content) => {
   return async dispatch => {
     const data = getData()
-    dispatch(loadStart());
-    dispatch(resetSuccess());
-    let index = data.findIndex(item => item.id === topicId)
+    dispatch(loadStart())
+    dispatch(resetSuccess())
+    const index = data.findIndex(item => item.id === topicId)
     if (index === -1) {
       dispatch(loadStop())
       return
@@ -264,7 +260,7 @@ export const addTodo = (topicId, content) => {
       dispatch(success())
       dispatch(getAll())
       setTimeout(() => {
-        dispatch(resetSuccess());
+        dispatch(resetSuccess())
       }, 50)
     }
   }
@@ -273,32 +269,32 @@ export const addTodo = (topicId, content) => {
 export const editTodos = (topicId, contents, action) => { // action = ['completed', 'incomplete', 'delete']
   return async dispatch => {
     const data = getData()
-    dispatch(loadStart());
-    dispatch(resetSuccess());
-    let index = data.findIndex(item => item.id === topicId)
+    dispatch(loadStart())
+    dispatch(resetSuccess())
+    const index = data.findIndex(item => item.id === topicId)
     if (index === -1) {
       dispatch(loadStop())
       return
     }
 
     if (action === 'incomplete' || action === 'completed') {
-      let originType = action === 'incomplete' ? 'completed' : 'incomplete'
+      const originType = action === 'incomplete' ? 'completed' : 'incomplete'
       contents.forEach(content => {
-        let itemIndex = data[index]['todos'][originType].findIndex(item => item.content === content.trim())
+        const itemIndex = data[index].todos[originType].findIndex(item => item.content === content.trim())
         if (itemIndex === -1) {
           dispatch(loadStop())
           return
         }
-        let item = data[index]['todos'][originType][itemIndex]
-        data[index]['todos'][action].unshift({ ...item })
-        data[index]['todos'][originType].splice(itemIndex, 1)
-      });
+        const item = data[index].todos[originType][itemIndex]
+        data[index].todos[action].unshift({ ...item })
+        data[index].todos[originType].splice(itemIndex, 1)
+      })
     } else {
       contents.forEach(content => {
-        const newIncomplete = data[index]['todos']['incomplete'].filter(todo => todo.content !== content.trim())
-        const newCompleted = data[index]['todos']['completed'].filter(todo => todo.content !== content.trim())
-        data[index]['todos']['incomplete'] = newIncomplete
-        data[index]['todos']['completed'] = newCompleted
+        const newIncomplete = data[index].todos.incomplete.filter(todo => todo.content !== content.trim())
+        const newCompleted = data[index].todos.completed.filter(todo => todo.content !== content.trim())
+        data[index].todos.incomplete = newIncomplete
+        data[index].todos.completed = newCompleted
       })
     }
     setData(data)

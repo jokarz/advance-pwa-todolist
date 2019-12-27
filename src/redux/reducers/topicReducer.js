@@ -1,13 +1,13 @@
 const initialState = null
 
 const topicReducer = (state = initialState, action) => {
-  const { data } = action;
+  const { data } = action
   switch (action.type) {
-    case "loadAll":
-      return data;
+    case 'loadAll':
+      return data
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default topicReducer;
+export default topicReducer

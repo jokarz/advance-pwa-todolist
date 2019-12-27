@@ -1,15 +1,14 @@
-import { StyleSheet } from 'aphrodite';
-import { bounceIn, bounceInUp, bounceOutUp, bounceInDown, headShake } from 'react-animations';
-
+import { StyleSheet } from 'aphrodite'
+import { bounceIn, bounceInUp, bounceOutUp, bounceInDown, headShake } from 'react-animations'
 
 export default StyleSheet.create({
   bounceInUp: {
     animationName: bounceInUp,
-    animationDuration: '0.2s',
+    animationDuration: '0.2s'
   },
   bounceInDown: {
     animationName: bounceInDown,
-    animationDuration: '0.2s',
+    animationDuration: '0.2s'
   },
   bounceIn: {
     animationName: bounceIn,
@@ -25,11 +24,11 @@ export default StyleSheet.create({
   },
   bounceOutUp: {
     animationName: bounceOutUp,
-    animationDuration: '.6s',
+    animationDuration: '.6s'
   },
   invalid: {
     animationName: headShake,
-    animationDuration: '.6s',
+    animationDuration: '.6s'
   },
   radius: {
     borderRadius: '25px'
@@ -84,19 +83,19 @@ export default StyleSheet.create({
   },
   fontTitan: {
     fontSize: '2rem',
-    fontFamily: "'Titan One', cursive",
+    fontFamily: "'Titan One', cursive"
   },
   fontTitanBigger: {
     fontSize: '2.5rem',
-    fontFamily: "'Titan One', cursive",
+    fontFamily: "'Titan One', cursive"
   },
   fontTitanSmaller: {
     fontSize: '1.8rem',
-    fontFamily: "'Titan One', cursive",
+    fontFamily: "'Titan One', cursive"
   },
   fontTitanSmallest: {
     fontSize: '1.2rem',
-    fontFamily: "'Titan One', cursive",
+    fontFamily: "'Titan One', cursive"
   },
   modalBackground: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)'
@@ -128,16 +127,16 @@ export default StyleSheet.create({
       boxShadow: '0 0.125rem 0.25rem rgba(0,0,0,0.075)'
     }
   },
-  altHeight:{
+  altHeight: {
     minHeight: '90vh'
   },
   fabButton: {
     width: '55px',
-    height: '55px',
+    height: '55px'
   },
   fabButtonHover: {
     ':active': {
-      transform: 'scale(0.8)',
+      transform: 'scale(0.8)'
     },
     transform: 'scale(1.3)',
     transition: 'all .1s ease-in-out'
@@ -150,7 +149,7 @@ export default StyleSheet.create({
   },
   fabSubButtonHover: {
     ':active': {
-      transform: 'scale(0.8)',
+      transform: 'scale(0.8)'
     },
     transition: 'all .1s ease-in-out'
   },

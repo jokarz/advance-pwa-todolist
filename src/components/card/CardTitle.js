@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useRef, useCallback } from 'react'
-import { css } from 'aphrodite';
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { css } from 'aphrodite'
 import { connect } from 'react-redux'
 
-import { deleteTopic, renameTopic, duplicateTopic, archiveTopic } from '../../redux/actions';
-import { toTitleCase } from '../../utility/textHelper';
-import styles from '../../utility/styles';
+import { deleteTopic, renameTopic, duplicateTopic, archiveTopic } from '../../redux/actions'
+import { toTitleCase } from '../../utility/textHelper'
+import styles from '../../utility/styles'
 
 const CardTitle = props => {
   const { id, title, success, successAt, deleteTopic, renameTopic, duplicateTopic, alert, alertAt, alertMessage, archiveTopic, viewArchive } = props
@@ -95,150 +95,184 @@ const CardTitle = props => {
   }, [title])
 
   return (
-    <div className={`card shadow-sm border-0 ${css(styles.radius, styles.title, styles.pointer, styles.titleTransition)}`} >
-      <div className="card-body p-3 text-center">
-        {renameTopicBtn != null ?
-          <>
+    <div className={`card shadow-sm border-0 ${css(styles.radius, styles.title, styles.pointer, styles.titleTransition)}`}>
+      <div className='card-body p-3 text-center'>
+        {renameTopicBtn != null
+          ? <>
             <input
               className={`form-control text-center ${alert && alertAt === `topictitle${id}` ? `is-invalid ${css(styles.invalid)}` : ''} `}
-              type="text" placeholder="Rename your topic~~" value={renameTitle} onChange={e => setRenameTitle(e.target.value)}
-              onKeyPress={(ev) => ev.key === 'Enter' && title !== renameTitle.trim() && renameTitle.trim() !== '' ? handleRenameTopic() : null} ref={inputNode} />
-            {alert && alertAt === `topictitle${id}` ? <div className="invalid-feedback"> {alertMessage} </div> : null}
-          </>
-          : <h4 className={`mb-0 text-center select-none ${css(styles.fontTitan, styles.textBlack)}`}
-            onClick={() => handleClickedTitle()}>{title}
-          </h4>
-        }
+              type='text' placeholder='Rename your topic~~' value={renameTitle} onChange={e => setRenameTitle(e.target.value)}
+              onKeyPress={(ev) => ev.key === 'Enter' && title !== renameTitle.trim() && renameTitle.trim() !== '' ? handleRenameTopic() : null} ref={inputNode}
+            />
+            {alert && alertAt === `topictitle${id}` ? <div className='invalid-feedback'> {alertMessage} </div> : null}
+            </>
+          : <h4
+            className={`mb-0 text-center select-none ${css(styles.fontTitan, styles.textBlack)}`}
+            onClick={() => handleClickedTitle()}
+          >{title}
+          </h4>}
         {
-          clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === null && duplicateTopicBtn == null && archiveTopicBtn == null ?
-            <div className="mt-2">
-              <button className={`btn mr-2 btn-warning mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                onClick={() => handleRenameTopic()}>
-                <span className="fas fa-edit"></span>
+          clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === null && duplicateTopicBtn == null && archiveTopicBtn == null
+            ? <div className='mt-2'>
+              <button
+                className={`btn mr-2 btn-warning mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                onClick={() => handleRenameTopic()}
+              >
+                <span className='fas fa-edit' />
               </button>
-              <button className={`btn mr-2 btn-primary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                onClick={() => handleDuplicateTopic()}>
-                <span className="fas fa-copy"></span>
+              <button
+                className={`btn mr-2 btn-primary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                onClick={() => handleDuplicateTopic()}
+              >
+                <span className='fas fa-copy' />
               </button>
-              <button className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                onClick={() => handleArchiveTopic()}>
-                <span className="fas fa-box"></span>
+              <button
+                className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                onClick={() => handleArchiveTopic()}
+              >
+                <span className='fas fa-box' />
               </button>
-              <button className={`btn btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                onClick={() => handleDeleteTopic()}>
-                <span className="fas fa-trash"></span>
+              <button
+                className={`btn btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                onClick={() => handleDeleteTopic()}
+              >
+                <span className='fas fa-trash' />
               </button>
-            </div>
-            : clickedTitle && !viewArchive && renameTopicBtn === false && deleteTopicBtn === null && duplicateTopicBtn == null && archiveTopicBtn == null ?
-              <div className="mt-2">
-                {
-                  title !== renameTitle.trim() && renameTitle.trim() !== '' ?
-                    <button className={`btn mr-2 btn-warning mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                      onClick={() => handleRenameTopic()}>
-                      <>
-                        <span className="mr-1">Rename this topic</span>
-                        <span className="fas fa-check"></span>
-                      </>
-                    </button> : null
-                }
-                <button className={`btn btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                  onClick={() => setRenameTopicBtn(null)}>
-                  <span className="mr-1">Cancel</span>
-                  <span className="fas fa-times"></span>
-                </button>
               </div>
-              : clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === false && duplicateTopicBtn == null && archiveTopicBtn == null ?
-                <div className="mt-2">
-                  <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                    onClick={() => handleDeleteTopic()}
-                    disabled={deleting}>
-                    {deleting ?
-                      <span>Deleting...</span> :
+            : clickedTitle && !viewArchive && renameTopicBtn === false && deleteTopicBtn === null && duplicateTopicBtn == null && archiveTopicBtn == null
+              ? <div className='mt-2'>
+                {
+                  title !== renameTitle.trim() && renameTitle.trim() !== ''
+                    ? <button
+                      className={`btn mr-2 btn-warning mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                      onClick={() => handleRenameTopic()}
+                      >
                       <>
-                        <span className="mr-1">Delete this topic</span>
-                        <span className="fas fa-check"></span>
+                        <span className='mr-1'>Rename this topic</span>
+                        <span className='fas fa-check' />
                       </>
-                    }
-                  </button>
-                  {deleting ? null :
-                    <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                      onClick={() => setDeleteTopicBtn(null)}>
-                      <span className="mr-1">Cancel</span>
-                      <span className="fas fa-times"></span>
-                    </button>
-                  }
+                      </button> : null
+                }
+                <button
+                  className={`btn btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                  onClick={() => setRenameTopicBtn(null)}
+                >
+                  <span className='mr-1'>Cancel</span>
+                  <span className='fas fa-times' />
+                </button>
                 </div>
-                : clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === null && duplicateTopicBtn === false && archiveTopicBtn === null ?
-                  <div className="mt-2">
-                    <button className={`btn mr-2 btn-primary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                      onClick={() => handleDuplicateTopic()}>
-                      <span className="mr-1">Duplicate this topic</span>
-                      <span className="fas fa-check"></span>
-                    </button>
-                    <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                      onClick={() => setDuplicateTopicBtn(null)}>
-                      <span className="mr-1">Cancel</span>
-                      <span className="fas fa-times"></span>
-                    </button>
+              : clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === false && duplicateTopicBtn == null && archiveTopicBtn == null
+                ? <div className='mt-2'>
+                  <button
+                    className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                    onClick={() => handleDeleteTopic()}
+                    disabled={deleting}
+                  >
+                    {deleting
+                      ? <span>Deleting...</span>
+                      : <>
+                        <span className='mr-1'>Delete this topic</span>
+                        <span className='fas fa-check' />
+                        </>}
+                  </button>
+                  {deleting ? null
+                    : <button
+                      className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                      onClick={() => setDeleteTopicBtn(null)}
+                      >
+                      <span className='mr-1'>Cancel</span>
+                      <span className='fas fa-times' />
+                      </button>}
                   </div>
-                  : clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === null && duplicateTopicBtn === null && archiveTopicBtn === false ?
-                    <div className="mt-2">
-                      <button className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                        onClick={() => handleArchiveTopic()}>
-                        <span className="mr-1">Archive this topic</span>
-                        <span className="fas fa-check"></span>
-                      </button>
-                      <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                        onClick={() => setArchiveTopicBtn(null)}>
-                        <span className="mr-1">Cancel</span>
-                        <span className="fas fa-times"></span>
-                      </button>
+                : clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === null && duplicateTopicBtn === false && archiveTopicBtn === null
+                  ? <div className='mt-2'>
+                    <button
+                      className={`btn mr-2 btn-primary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                      onClick={() => handleDuplicateTopic()}
+                    >
+                      <span className='mr-1'>Duplicate this topic</span>
+                      <span className='fas fa-check' />
+                    </button>
+                    <button
+                      className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                      onClick={() => setDuplicateTopicBtn(null)}
+                    >
+                      <span className='mr-1'>Cancel</span>
+                      <span className='fas fa-times' />
+                    </button>
                     </div>
-                    : clickedTitle && viewArchive && unArchiveTopicBtn == null && deleteTopicBtn === null ?
-                      <div className="mt-2">
-                        <button className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                          onClick={() => handleUnArchiveTopic()}>
-                          <span className="fas fa-box-open"></span>
-                        </button>
-                        <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                          onClick={() => handleDeleteTopic()}>
-                          <span className="fas fa-trash"></span>
-                        </button>
+                  : clickedTitle && !viewArchive && renameTopicBtn === null && deleteTopicBtn === null && duplicateTopicBtn === null && archiveTopicBtn === false
+                    ? <div className='mt-2'>
+                      <button
+                        className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                        onClick={() => handleArchiveTopic()}
+                      >
+                        <span className='mr-1'>Archive this topic</span>
+                        <span className='fas fa-check' />
+                      </button>
+                      <button
+                        className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                        onClick={() => setArchiveTopicBtn(null)}
+                      >
+                        <span className='mr-1'>Cancel</span>
+                        <span className='fas fa-times' />
+                      </button>
                       </div>
-                      : clickedTitle && viewArchive && unArchiveTopicBtn === false && deleteTopicBtn === null ?
-                        <div className="mt-2">
-                          <button className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                            onClick={() => handleUnArchiveTopic()}>
-                            <span className="mr-1">Unarchive this topic</span>
-                            <span className="fas fa-check"></span>
-                          </button>
-                          <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                            onClick={() => setUnArchiveTopicBtn(null)}>
-                            <span className="mr-1">Cancel</span>
-                            <span className="fas fa-times"></span>
-                          </button>
+                    : clickedTitle && viewArchive && unArchiveTopicBtn == null && deleteTopicBtn === null
+                      ? <div className='mt-2'>
+                        <button
+                          className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                          onClick={() => handleUnArchiveTopic()}
+                        >
+                          <span className='fas fa-box-open' />
+                        </button>
+                        <button
+                          className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                          onClick={() => handleDeleteTopic()}
+                        >
+                          <span className='fas fa-trash' />
+                        </button>
                         </div>
-                        : clickedTitle && viewArchive && unArchiveTopicBtn == null && deleteTopicBtn === false ?
-                          <div className="mt-2">
-                            <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                              onClick={() => handleDeleteTopic()}
-                              disabled={deleting}>
-                              {deleting ?
-                                <span>Deleting...</span> :
-                                <>
-                                  <span className="mr-1">Delete this topic</span>
-                                  <span className="fas fa-check"></span>
-                                </>
-                              }
-                            </button>
-                            {deleting ? null :
-                              <button className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
-                                onClick={() => setDeleteTopicBtn(null)}>
-                                <span className="mr-1">Cancel</span>
-                                <span className="fas fa-times"></span>
-                              </button>
-                            }
+                      : clickedTitle && viewArchive && unArchiveTopicBtn === false && deleteTopicBtn === null
+                        ? <div className='mt-2'>
+                          <button
+                            className={`btn mr-2 btn-info mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                            onClick={() => handleUnArchiveTopic()}
+                          >
+                            <span className='mr-1'>Unarchive this topic</span>
+                            <span className='fas fa-check' />
+                          </button>
+                          <button
+                            className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                            onClick={() => setUnArchiveTopicBtn(null)}
+                          >
+                            <span className='mr-1'>Cancel</span>
+                            <span className='fas fa-times' />
+                          </button>
                           </div>
+                        : clickedTitle && viewArchive && unArchiveTopicBtn == null && deleteTopicBtn === false
+                          ? <div className='mt-2'>
+                            <button
+                              className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                              onClick={() => handleDeleteTopic()}
+                              disabled={deleting}
+                            >
+                              {deleting
+                                ? <span>Deleting...</span>
+                                : <>
+                                  <span className='mr-1'>Delete this topic</span>
+                                  <span className='fas fa-check' />
+                                  </>}
+                            </button>
+                            {deleting ? null
+                              : <button
+                                className={`btn mr-2 btn-secondary mt-2 ${css(styles.radius, styles.bounceInFast, styles.shadow)}`}
+                                onClick={() => setDeleteTopicBtn(null)}
+                                >
+                                <span className='mr-1'>Cancel</span>
+                                <span className='fas fa-times' />
+                                </button>}
+                            </div>
                           : null
         }
       </div>
@@ -246,18 +280,16 @@ const CardTitle = props => {
   )
 }
 
-
 const mapStateToProps = state => ({
   ...state.Misc
-});
+})
 
 const mapDispatchToProps = dispatch => ({
   deleteTopic: topicId => dispatch(deleteTopic(topicId)),
   renameTopic: (topicId, title) => dispatch(renameTopic(topicId, title)),
   duplicateTopic: topicId => dispatch(duplicateTopic(topicId)),
   archiveTopic: (topicId, archive) => dispatch(archiveTopic(topicId, archive))
-});
-
+})
 
 CardTitle.defaultProps = {
   title: '...',
@@ -268,4 +300,4 @@ CardTitle.defaultProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CardTitle);
+)(CardTitle)

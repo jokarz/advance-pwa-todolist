@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { bounceIn, headShake } from 'react-animations';
-import { StyleSheet, css } from 'aphrodite';
+import { bounceIn, headShake } from 'react-animations'
+import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
 
-import { toCapFirst } from '../../utility/textHelper';
+import { toCapFirst } from '../../utility/textHelper'
 import { addTodo } from '../../redux/actions'
 
 const styles = StyleSheet.create({
@@ -33,9 +33,9 @@ const AddTodoInput = props => {
   }
 
   const handleAddTodo = () => {
-    let con = content.trim()
+    const con = content.trim()
     if (con) {
-      addTodo(id, toCapFirst(con));
+      addTodo(id, toCapFirst(con))
     }
   }
 
@@ -45,39 +45,41 @@ const AddTodoInput = props => {
     }
   }, [success, successAt, id])
 
-
   return (
     <div className={`card-body pb-0 ${className}`}>
       <div className={`input-group ${alert && alertAt === uid ? css(styles.invalid) : ''}`}>
-        <input className={`form-control ${alert && alertAt === uid ? 'is-invalid' : ''} `}
-          type="text" placeholder={countList ? 'Add another todo...' : 'Add a todo...'} value={content} onChange={handleInput}
-          onKeyPress={(ev) => { if (ev.key === 'Enter') { handleAddTodo() } }} onFocus={(e) => { setHideFab(true) }} onBlur={(e) => { setHideFab(false) }}/>
+        <input
+          className={`form-control ${alert && alertAt === uid ? 'is-invalid' : ''} `}
+          type='text' placeholder={countList ? 'Add another todo...' : 'Add a todo...'} value={content} onChange={handleInput}
+          onKeyPress={(ev) => { if (ev.key === 'Enter') { handleAddTodo() } }} onFocus={(e) => { setHideFab(true) }} onBlur={(e) => { setHideFab(false) }}
+        />
 
         {
-          content ?
-            <div className={`test input-group-append ${css(styles.animateInRight, styles.borderRightRadius)}`}>
-              <button className={`btn ${alert && alertAt === uid ? 'btn-secondary' : 'btn-primary'} ${css(styles.borderRightRadius)}`} type="button"
-                onClick={handleAddTodo}>
-                <span className="fas fa-plus"></span>
+          content
+            ? <div className={`test input-group-append ${css(styles.animateInRight, styles.borderRightRadius)}`}>
+              <button
+                className={`btn ${alert && alertAt === uid ? 'btn-secondary' : 'btn-primary'} ${css(styles.borderRightRadius)}`} type='button'
+                onClick={handleAddTodo}
+              >
+                <span className='fas fa-plus' />
               </button>
-            </div> : null
+              </div> : null
         }
-        {alert && alertAt === uid ? <span className="invalid-feedback"> {alertMessage} </span> : null}
+        {alert && alertAt === uid ? <span className='invalid-feedback'> {alertMessage} </span> : null}
       </div>
     </div>
   )
 }
 
-
 const mapStateToProps = state => ({
   ...state.Misc
-});
+})
 
 const mapDispatchToProps = dispatch => ({
   addTodo: (topicId, todoContent) => dispatch(addTodo(topicId, todoContent))
-});
+})
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddTodoInput);
+)(AddTodoInput)

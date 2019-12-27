@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite'
 
 const styles = StyleSheet.create({
 
@@ -69,18 +69,17 @@ const Checkbox = props => {
     <div className={`form-group ${css(styles.formGroup)}`}>
       <div className={`custom-control custom-checkbox ${!viewArchive ? css(styles.control) : css(styles.controlOffline)}`}>
         {
-          !viewArchive ?
-            <input type="checkbox" className='custom-control-input d-none' id={topicId + id} onChange={() => setChecked(!checked)} checked={checked} />
+          !viewArchive
+            ? <input type='checkbox' className='custom-control-input d-none' id={topicId + id} onChange={() => setChecked(!checked)} checked={checked} />
             : null
         }
 
         <label className={!viewArchive ? `custom-control-label select-none ${css(styles.controlLabel, styles.textBlack, styles.pointer)}` : `${css(styles.controlLabelOffline)}`} htmlFor={topicId + id}>
-          {viewArchive ?
-            <>
-              <span className="fas fa-circle fa-xs mr-2"></span>
+          {viewArchive
+            ? <>
+              <span className='fas fa-circle fa-xs mr-2' />
               {text}
-            </> : <>{ text }</>
-          }
+              </> : <>{text}</>}
         </label>
       </div>
     </div>
