@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card renders 1`] = `
+<DocumentFragment>
+  <div
+    class="d-block d-sm-inline-block  "
+    style="width: 100%;"
+  >
+    <div
+      class="card shadow-sm border-0 radius_1fb25e-o_O-title_1bmx9ov-o_O-pointer_13xlah4-o_O-titleTransition_1eh30p4"
+    >
+      <div
+        class="card-body p-3 text-center"
+      >
+        <h4
+          class="mb-0 text-center select-none fontTitan_dzn0bb-o_O-textBlack_er4n8x"
+        >
+          Test
+        </h4>
+      </div>
+    </div>
+    <div
+      class="card shadow-sm border-0 radius_1fb25e"
+    >
+      <div
+        class="card-body pt-0 pb-2"
+      />
+      <div
+        class="card-body pb-0 pt-4"
+      >
+        <div
+          class="input-group "
+        >
+          <input
+            class="form-control  "
+            placeholder="Add a todo..."
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="card-body d-flex flex-column justify-content-center align-items-center"
+      >
+        <h1
+          class=" text-muted text-center"
+        >
+          <span
+            class="fas fa-pencil-alt"
+          />
+        </h1>
+        <h5
+          class="font-weight-light m-0 text-muted text-center"
+        >
+          Add some todos...
+        </h5>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -142,7 +142,7 @@ const Card = props => {
                   </span>
                 </li>
               </ul>
-              </div> : viewArchive ? <div className='py-2' /> : null}
+            </div> : viewArchive ? <div className='py-2' /> : null}
           {currentTab === 'incomplete'
             ? <>
               {!viewArchive
@@ -153,26 +153,26 @@ const Card = props => {
                   <div className={`px-4 pt-0 ${css(styles.limitHeight)} ${incompleteEditShow ? '' : 'mb-4'}`}>
                     {incomplete.map(item => (<Checkbox key={item.id} id={item.id} topicId={id} text={item.content} clickOption={handleIncompleteClick} viewArchive={viewArchive} />))}
                   </div>
-                  </div>
+                </div>
                 : <div className='card-body d-flex flex-column justify-content-center align-items-center'>
                   {completed.length
                     ? <>
-                      <h1 className='fas fa-glass-cheers text-muted text-center' />
+                      <h1 className=' text-muted text-center' ><span className="fas fa-glass-cheers"></span></h1>
                       <h5 className='font-weight-light m-0 text-muted text-center'>No todos left</h5>
-                      </>
+                    </>
                     : <>
-                      <h1 className='fas fa-pencil-alt text-muted text-center' />
+                      <h1 className=' text-muted text-center' ><span className="fas fa-pencil-alt"></span></h1>
                       <h5 className='font-weight-light m-0 text-muted text-center'>{viewArchive ? 'No todos found' : 'Add some todos...'}</h5>
                     </>}
-                  </div>}
-              </>
+                </div>}
+            </>
             : <>
               {completed.length
                 ? <div className={`card-body px-0 ${completedEditShow ? '' : 'pb-0'}`}>
                   <div className={`px-4 pt-0 ${css(styles.limitHeight)} ${completedEditShow ? '' : 'mb-4'}`}>
                     {completed.map(item => (<Checkbox key={item.id} id={item.id} topicId={id} text={item.content} clickOption={handleCompletedClick} viewArchive={viewArchive} />))}
                   </div>
-                  </div> : null}
+                </div> : null}
             </>}
           {
             incompleteEditShow
@@ -199,7 +199,7 @@ const Card = props => {
                   </button>
                 </div>
                 {alert && alertAt === `edittodo${id}` ? <p className='text-center text-danger mb-0 mt-3' style={{ fontSize: '80%' }}>{alertMessage}</p> : null}
-                </div> : null
+              </div> : null
           }
           {
             completedEditShow
@@ -226,7 +226,7 @@ const Card = props => {
                   </button>
                 </div>
                 {alert && alertAt === `edittodo${id}` ? <p className='text-center text-danger mb-0 mt-3' style={{ fontSize: '80%' }}>{alertMessage}</p> : null}
-                </div> : null
+              </div> : null
           }
         </div>
       </div>

@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default setup renders 1`] = `
+<DocumentFragment>
+  <div
+    class="d-flex justify-content-center align-items-center height-90"
+  >
+    <h5
+      class="text-center fontTitan_dzn0bb"
+    >
+      Create new topic to get started
+    </h5>
+  </div>
+  <div
+    class="fixed-bottom text-center mb-5 eventPassThrough_1dwq0yf-o_O-bounceIn_av56gd"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="col"
+      >
+        <button
+          class="select-none btn shadow btn-lg rounded-circle btn-primary
+              fabSubButtonHover_wu4qfj-o_O-eventAuto_ow2iz6-o_O-bounceInFast_tj83ey-o_O-fontTitanSmaller_g467oi
+              "
+          type="button"
+        >
+          <span
+            class="fas fa-plus"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal d-none"
+  >
+    <div
+      class="backDrop_4pfu4w-o_O-modalBackground_122ndvs"
+    />
+    <div
+      class="modal-dialog mt-4 bounceOutUp_wlq44y"
+    >
+      <div
+        class="modal-content radius_1fb25e"
+      >
+        <div
+          class="modal-header"
+        >
+          <h5
+            class="modal-title text-center m-auto fontTitanSmaller_g467oi"
+          >
+            New Topic
+          </h5>
+        </div>
+        <div
+          class="modal-body"
+        >
+          <input
+            class="form-control  "
+            placeholder="What new topic you have in mind~"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="btn btn-secondary radius_1fb25e-o_O-shadow_jlwb8p"
+            type="button"
+          >
+            <span
+              class="mr-1"
+            >
+              Nahh
+            </span>
+            <span
+              class="fas fa-times"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
